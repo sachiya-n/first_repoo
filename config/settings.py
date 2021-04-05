@@ -22,10 +22,18 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'rzbo&f6hz+c8t3l8-_mq3j3-8w#pq@#wa5oi^&#5afx^%$%8y!'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY WARNING: don't run with debug turned on in production! #デプロイのために追記
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '.pythonanywhere.com', 'sachiyan.pythonanywhere.com']
+
+
+CSRF＿COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+
+from django.core.management.utils import get_random_secret_key
+SECRET_KEY = get_random_secret_key()
 
 
 # Application definition
@@ -124,3 +132,10 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+#デプロイのために追記
+try:
+    from .local_settings import *
+except:
+    pass
